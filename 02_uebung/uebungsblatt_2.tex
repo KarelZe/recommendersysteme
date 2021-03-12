@@ -1,0 +1,395 @@
+\documentclass[fleqn]{article}
+\usepackage[shortlabels]{enumitem}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usepackage{float}
+\usetikzlibrary{trees}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=10mm,
+ top=20mm,
+ }
+ \usepackage[ngerman,german]{babel}
+ \usepackage{csquotes}
+ \usepackage[style=apa,backend=biber]{biblatex}
+ \addbibresource{main2.bib}
+
+
+
+\titlelabel{\thetitle\enspace}
+
+
+\begin{document}
+
+\author{Markus Bilz -- Matr. Nr. 2327197}
+\title{Übungsblatt 2 Recommendersysteme}
+\maketitle
+% \thispagestyle{fancy}
+
+\begin{enumerate}[a)]
+	\item Ein öffentliches Gut zeichnet sich dadurch aus, dass niemand von dessen Verbrauch ausgeschlossen werden kann (\textbf{Nicht-Ausschluss}) und dessen Verbrauch 
+	      durch Einen, nicht den etwaigen Verbrauch eines Zweiten einschränkt (\textbf{Nicht-Rivalität}) \autocite[vgl.][S.~10]{geyer-schulz_sonnenbichler_2019}.
+	\item 
+	      \textbf{Zielsetzung:}\\
+        Das Empfehlungsakquisitionsspiel versucht den Wert von Empfehlungen zu ermitteln, um damit eine effiziente Abgabe von Bewertungen für ein Produkt zu erreichen \autocite[vgl. ][S.~565]{avery_market_1999}.
+      
+        \textbf{Aufbau:}\\
+         Im Empfehlungsakquisitionsspiel entscheidet jeder Spieler, ob er ein Produkt konsumiert oder nicht. Konsumiert ein Spieler ein Produkt tatsächlich, so wird seine Empfehlung ohne Kosten den anderen Spielern publik. Die Empfehlung ist damit zum öffentlichen Gut geworden. Gefällt einem Spieler ein Produkt, so steigert dies den erwarteten Payoff der nachfolgenden Spieler, womit der Konsum durch diese wahrscheinlicher wird. 
+        Das Spiel existiert mit den Modi \textit{Batch Mode} und \textit{One-at-a-Time}, welche sich nach Anzahl der Runden und Konsumenten unterscheiden. \autocite[vgl.][S.~566~ff.]{avery_market_1999}
+
+  \item \label{it:vars}
+        Die Bedeutung der Parameter ist folgende:        
+	      \begin{itemize}
+	      	\item $f$ bezeichnet die Wahrscheinlichkeit, mit welcher der zugehörige Knoten im Spielverlauf erreicht werden kann.
+	      	\item $p$ bezeichnet die \textit{a priori} Wahrscheinlichkeit, dass ein Produkt gut ist.
+	      	\item $\rho$ bezeichnet die  (subjektive) Wahrscheinlichkeit unter der Gefahr des Irrtums, dass ein Produkt durch den nächsten Spieler als gut wahrgenommen wird. 
+	      	\item $b$ bezeichnet die bedingte Wahrscheinlichkeit, zu welcher ein schlechtes Produkt durch den Spieler als schlecht empfunden wird.
+	      	\item $g$ bezeichnet die bedingte Wahrscheinlichkeit, zu welcher ein gutes Produkt auch einen Spieler auch als gut wahrgenommen wird.
+        \end{itemize}
+  
+
+	\clearpage      
+  \item  Der Entscheidungsbaum ist in Abbildung~\ref{fig:entscheidungsbaum} dargestellt.
+  
+    % Set the overall layout of the tree
+    \tikzstyle{level 1}=[level distance=3cm, sibling distance=8.5cm]
+    \tikzstyle{level 2}=[level distance=3cm, sibling distance=4.5cm]
+    \tikzstyle{level 3}=[level distance=3cm, sibling distance=2cm]
+    % Define styles for bags and leafs
+    \tikzstyle{bag} = [text width=4em, text centered]
+    \tikzstyle{end} = [circle, minimum width=3pt,fill, inner sep=0pt]
+    
+    % The sloped option gives rotated edge labels. Personally
+    % I find sloped labels a bit difficult to read. Remove the sloped options
+    % to get horizontal labels. 
+    % http://texample.net/tikz/examples/probability-tree/
+    \begin{figure}[hbt!]
+      \centering
+    \begin{tikzpicture}[grow=right, sloped, centered]
+        \node[end] {}
+        child {
+            node[end] {}        
+            child {
+              node[end] {}        
+              child {
+                  node[end, label=right:
+                  {}] {}
+                  edge from parent
+                  node[above] {schlecht}
+                  node[below]  {$\frac{13}{17}$}
+              }
+              child {
+                  node[end, label=right:
+                  {}] {}
+                  edge from parent
+                  node[above] {gut}
+                  node[below]  {$\frac{4}{17}$}
+              }
+              edge from parent 
+              node[above] {schlecht}
+              node[below]  {$\frac{17}{25}$}
+            }
+            child {
+              node[end] {}        
+              child {
+                  node[end, label=right:
+                  {}] {}
+                  edge from parent
+                  node[above] {schlecht}
+                  node[below]  {$\frac{1}{2}$}
+              }
+              child {
+                  node[end, label=right:
+                  {}] {}
+                  edge from parent
+                  node[above] {gut}
+                  node[below]  {$\frac{1}{2}$}
+              }
+              edge from parent 
+              node[above] {gut}
+              node[below]  {$\frac{8}{25}$}
+            }
+            edge from parent 
+            node[above] {schlecht}
+            node[below]  {$\frac{1}{2}$}
+        }
+        child {
+            node[end] {}        
+            child {
+              node[end] {}        
+              child {
+                  node[end, label=right:
+                  {}] {}
+                  edge from parent
+                  node[above] {schlecht}
+                  node[below]  {$\frac{1}{2}$}
+              }
+              child {
+                  node[end, label=right:
+                  {}] {}
+                  edge from parent
+                  node[above] {gut}
+                  node[below]  {$\frac{1}{2}$}
+              }
+              edge from parent 
+              node[above] {schlecht}
+              node[below]  {$\frac{8}{25}$}
+            }
+            child {
+              node[end] {}        
+              child {
+                  node[end, label=right:
+                  {}] {}
+                  edge from parent
+                  node[above] {schlecht}
+                  node[below]  {$\frac{4}{17}$}
+              }
+              child {
+                  node[end, label=right:
+                  {}] {}
+                  edge from parent
+                  node[above] {gut}
+                  node[below]  {$\frac{13}{17}$}
+              }
+              edge from parent 
+              node[above] {gut}
+              node[below]  {$\frac{17}{25}$}
+            }
+            edge from parent 
+          % oberer Teil  
+          node[above] {gut}
+            node[below]  {$\frac{1}{2}$}
+        };
+    \end{tikzpicture}
+    \caption[]{Entscheidungsbaum (Eigene Darstellung)}
+    \label{fig:entscheidungsbaum}
+  \end{figure}
+
+Unten stehend findet sich der komplette Rechenweg zum Baum einschließlich aller Variablen aus Punkt \ref{it:vars}.
+
+\textbf{Ebene 1}
+
+$$
+\begin{aligned}
+    f&=1,\\
+    g&=\frac{4}{5},\\
+    b&=\frac{4}{5},\\
+    p_{1}&=\frac{1}{2}, \\
+    \rho_{1}&= p_{1} g+\left(1-p_{1}\right)(1-b) = \frac{1}{2} \frac{4}{5}+\left(1- \frac{1}{2}\right) \left(1- \frac{4}{5}\right)=\frac{1}{2},
+\end{aligned}
+$$
+
+\textbf{Ebene 2 oben}
+
+$$
+\begin{aligned}
+    f&=\frac{1}{2},\\
+    p_{2}^{+}&=(g p_1)/ \rho_1 = \left(\frac{4}{5} \frac{1}{2}\right) / \frac{1}{2} = \frac{4}{5}, \\
+    \rho_{2}^{+}&= p_{2}^{+} g+\left(1-p_{2}^{+}\right)(1-b) = \frac{4}{5} \frac{4}{5}+\left(1- \frac{4}{5}\right) \left(1- \frac{4}{5}\right)=\frac{17}{25},
+\end{aligned}
+$$
+
+\textbf{Ebene 2 unten}
+
+$$
+\begin{aligned}
+    f&=\frac{1}{2},\\
+    p_{2}^{-}&=(1-g) p_1 / (1- \rho_1) = \left(1-\frac{4}{5}\right) \frac{1}{2} / \left(1 -\frac{1}{2}\right) = \frac{1}{5}, \\
+    \rho_{2}^{-}&= p_{2}^{-} g+\left(1-p_{2}^{-}\right)(1-b) = \frac{1}{5} \frac{4}{5}+\left(1- \frac{1}{5}\right) \left(1- \frac{4}{5}\right)=\frac{8}{25},
+\end{aligned}
+$$
+
+\textbf{Ebene 3 oben, oben}
+
+$$
+\begin{aligned}
+    f&=\frac{1}{2} \frac{17}{25} = \frac{17}{50},\\
+    p_{3}^{++}&=(g p_2^{+})/ \rho_2^{+} = \left(\frac{4}{5} \frac{4}{5}\right) / \frac{17}{25} = \frac{16}{17}, \\
+    \rho_{3}^{++}&= p_{3}^{++} g+\left(1-p_{3}^{++}\right)(1-b) = \frac{16}{17} \frac{4}{5}+\left(1- \frac{16}{17}\right) \left(1- \frac{4}{5}\right)=\frac{13}{17},
+\end{aligned}
+$$
+
+\textbf{Ebene 3 oben, unten}
+
+$$
+\begin{aligned}
+    f&=\frac{1}{2} \frac{8}{25} = \frac{8}{50} ,\\
+    p_{3}^{+-}&=(1-g) p_2^{+} / (1- \rho_2^{+}) = \left(1-\frac{4}{5}\right) \frac{4}{5} / \left(1 -\frac{17}{25}\right) = \frac{1}{2}, \\
+    \rho_{3}^{+-}&= p_{3}^{+-} g+\left(1-p_{3}^{+-}\right)(1-b) = \frac{1}{2} \frac{4}{5}+\left(1- \frac{1}{2}\right) \left(1- \frac{4}{5}\right)=\frac{1}{2},
+\end{aligned}
+$$
+
+\textbf{Ebene 3 unten, oben}
+
+$$
+\begin{aligned}
+    f&=\frac{1}{2} \frac{8}{25} = \frac{8}{50},\\
+    p_{3}^{-+}&=(g p_2^{-})/ \rho_2^{-} = \left(\frac{4}{5} \frac{1}{5}\right) / \frac{8}{25} = \frac{1}{2}, \\
+    \rho_{3}^{-+}&= p_{3}^{-+} g+\left(1-p_{3}^{-+}\right)(1-b) = \frac{1}{2} \frac{4}{5}+\left(1- \frac{1}{2}\right) \left(1- \frac{4}{5}\right)=\frac{1}{2},
+\end{aligned}
+$$
+
+\textbf{Ebene 3 unten, unten}
+
+$$
+\begin{aligned}
+    f&=\frac{1}{2} \frac{17}{25} = \frac{17}{50} ,\\
+    p_{3}^{--}&=(1-g) p_2^{-} / (1- \rho_2^{-}) = \left(1-\frac{4}{5}\right) \frac{1}{5} / \left(1 -\frac{8}{25}\right) = \frac{1}{17}, \\
+    \rho_{3}^{--}&= p_{3}^{--} g+\left(1-p_{3}^{--}\right)(1-b) = \frac{1}{17} \frac{4}{5}+\left(1- \frac{1}{17}\right) \left(1- \frac{4}{5}\right)=\frac{4}{17},
+\end{aligned}
+$$
+
+\textbf{Ebene 4 oben, oben, oben}
+
+$$
+\begin{aligned}
+    f&=\frac{17}{50} \frac{13}{17} = \frac{13}{50},\\
+    p_{4}^{+++}&=(g p_3^{++})/ \rho_3^{++} = \left(\frac{4}{5} \frac{16}{17}\right) / \frac{13}{17} = \frac{64}{65}, \\
+    \rho_{4}^{+++}&= p_{4}^{+++} g+\left(1-p_{4}^{+++}\right)(1-b) = \frac{64}{65} \frac{4}{5}+\left(1- \frac{64}{65}\right) \left(1- \frac{4}{5}\right)=\frac{257}{325},
+\end{aligned}
+$$
+
+\textbf{Ebene 4 oben, oben, unten}
+
+$$
+\begin{aligned}
+    f&=\frac{17}{50} \frac{4}{17} = \frac{2}{25} ,\\
+    p_{4}^{++-}&=(1-g) p_3^{++} / (1- \rho_3^{++}) = \left(1-\frac{4}{5}\right) \frac{16}{17} / \left(1 -\frac{13}{17}\right) = \frac{4}{5}, \\
+    \rho_{4}^{++-}&= p_{4}^{++-} g+\left(1-p_{4}^{++-}\right)(1-b) = \frac{4}{5} \frac{4}{5}+\left(1- \frac{4}{5}\right) \left(1- \frac{4}{5}\right)=\frac{17}{25},
+\end{aligned}
+$$
+
+\textbf{Ebene 4 oben, unten, oben}
+
+$$
+\begin{aligned}
+    f&=\frac{8}{50} \frac{1}{2} = \frac{2}{25} ,\\
+    p_{4}^{+-+}&=\left(g p_3^{+-}\right) / \rho_3^{+-} = \left(\frac{4}{5} \frac{1}{2} \right) / \frac{1}{2} = \frac{4}{5}, \\
+    \rho_{4}^{+-+}&= p_{4}^{+-+} g+\left(1-p_{4}^{+-+}\right)(1-b) = \frac{4}{5} \frac{4}{5}+\left(1- \frac{4}{5}\right) \left(1- \frac{4}{5}\right)=\frac{17}{25},
+\end{aligned}
+$$
+
+\textbf{Ebene 4 oben, unten, oben}
+
+$$
+\begin{aligned}
+    f&=\frac{8}{50} \frac{1}{2} = \frac{2}{25} ,\\
+    p_{4}^{+--}&=(1-g) p_3^{+-} / (1- \rho_3^{+-}) = \left(1-\frac{4}{5}\right) \frac{1}{2} / \left(1 -\frac{1}{2}\right) = \frac{1}{5}, \\
+    \rho_{4}^{+--}&= p_{4}^{+--} g+\left(1-p_{4}^{+--}\right)(1-b) = \frac{1}{5} \frac{4}{5}+\left(1- \frac{1}{5}\right) \left(1- \frac{4}{5}\right)=\frac{8}{25},
+\end{aligned}
+$$
+
+\textbf{Ebene 4 unten, oben, oben}
+
+$$
+\begin{aligned}
+    f&=\frac{8}{50} \frac{1}{2} = \frac{2}{25} ,\\
+    p_{4}^{-++}&=(g p_3^{-+}) / \rho_3^{-+}= \frac{1}{2} \frac{4}{5} / \frac{1}{2} = \frac{4}{5}, \\
+    \rho_{4}^{-++}&= p_{4}^{-++} g+\left(1-p_{4}^{-++}\right)(1-b) = \frac{4}{5} \frac{4}{5}+\left(1- \frac{4}{5}\right) \left(1- \frac{4}{5}\right)=\frac{17}{25},
+\end{aligned}
+$$
+
+\textbf{Ebene 4 unten, oben, unten}
+
+$$
+\begin{aligned}
+    f&=\frac{8}{50} \frac{1}{2} = \frac{2}{25} ,\\
+    p_{4}^{-+-}&=(1-g) p_3^{-+} / (1- \rho_3^{-+}) = \left(1-\frac{4}{5}\right) \frac{1}{2} / \left(1 -\frac{1}{2}\right) = \frac{1}{5}, \\
+    \rho_{4}^{-+-}&= p_{4}^{-+-} g+\left(1-p_{4}^{-+-}\right)(1-b) = \frac{1}{5} \frac{4}{5}+\left(1- \frac{1}{5}\right) \left(1- \frac{4}{5}\right)=\frac{8}{25},
+\end{aligned}
+$$
+
+\textbf{Ebene 4 unten, unten, oben}
+
+$$
+\begin{aligned}
+    f&=\frac{17}{50} \frac{4}{17} = \frac{2}{25} ,\\
+    p_{4}^{--+}&=\left(g p_3^{--}\right) / \rho_3^{--} = \frac{4}{5} \frac{1}{17} / \frac{4}{17} = \frac{1}{5}, \\
+    \rho_{4}^{--+}&= p_{4}^{--+} g+\left(1-p_{4}^{--+}\right)(1-b) = \frac{1}{5} \frac{4}{5}+\left(1- \frac{1}{5}\right) \left(1- \frac{4}{5}\right)=\frac{8}{25},
+\end{aligned}
+$$
+
+\textbf{Ebene 4 unten, unten, unten}
+
+$$
+\begin{aligned}
+    f&=\frac{17}{50} \frac{13}{17} = \frac{13}{50} ,\\
+    p_{4}^{---}&=(1-g) p_3^{--} / (1- \rho_3^{--}) = \left(1-\frac{4}{5}\right) \frac{1}{17} / \left(1 -\frac{4}{17}\right) = \frac{1}{65}, \\
+    \rho_{4}^{---}&= p_{4}^{---} g+\left(1-p_{4}^{---}\right)(1-b) = \frac{1}{65} \frac{4}{5}+\left(1- \frac{1}{65}\right) \left(1- \frac{4}{5}\right)=\frac{68}{325}.
+\end{aligned}
+$$
+
+	\item\label{it:payoffs} Sei der Payoff für Spieler A, B, C und D wie in Tabelle \ref{tab:payoffs}.
+  
+  \begin{table}[H]
+    \centering
+        \begin{tabular}{l l l}
+	      	\hline Spieler $i$  & pos. Payoff $r_{i}$ & neg. Payoff $s_{i}$ \\
+	      	\hline A & 1                   & 0                   \\
+	      	\hline B & 2                   & 0                   \\
+	      	\hline C & 2                   & -2                  \\
+	      	\hline D & 0                   & -10                 \\
+	      	\hline
+        \end{tabular}
+        \caption{Payoffs}
+        \label{tab:payoffs}
+  \end{table}      
+
+  Der Payoff aller Spieler lässt sich dann nach \textcite[S.~17]{nazemi_2020} ermitteln als:
+
+  $${Payoff}_{x}=\sum_{x \text { konsumiert in } i} f_{i} \left(\rho_{i} {Pay}_{x}^{+}+\left(1-\rho_{i}\right) {Pay}_{x}^{-}\right).$$
+
+  Damit ergibt sich ein Einzelspieler-Payoff in Höhe von:
+
+  ${Payoff}_{A}=1 \left(\frac{1}{2} 1 - \frac{1}{2} 0\right)= \frac{1}{2},$
+
+  ${Payoff}_{B}=\frac{1}{2} \left(\frac{17}{25} 2-\frac{8}{25} 0\right)+\frac{1}{2} \left(\frac{8}{25} 2-\frac{17}{25} 0\right)=1,$
+
+  ${Payoff}_{C}=\max \left(0 ; \frac{17}{50} \left(\frac{13}{17}  2-\frac{4}{17}  2\right)\right)+\max \left(0 ; \frac{4}{25} \left(\frac{1}{2}  2-\frac{1}{2}  2\right)\right) = 0+0=0,$
+  
+  ${Payoff}_{D} =\max \left(0; 0; 0; \frac{13}{50} \left(\frac{257}{325}  0-\frac{68}{325}  10\right)\right)+\max \left(0; 0; 0; \frac{2}{25} \left(\frac{17}{25} 0-\frac{8}{25} 10\right)\right) = 0+0=0.$
+
+  Der Gesamt-Payoff beträgt:
+  ${Payoff}_{\Sigma}=\frac{1}{2}+1+0+0 = \frac{3}{2}$.
+  
+
+% https://www.studocu.com/de/document/karlsruher-institut-fuer-technologie/recommendersysteme/zusammenfassungen/recommender-systems-sommersemester-2018/5897744/view
+% Optimale Allokation: 
+% -  Wert einer Allokation: Summe über alle Knoten von dem Payoff des Knotens (Payoff Spieler -> Rho * Nutzen 
+% + (1-Rho) * Schaden) mal die 
+% Wkt. diesen Knoten zu erreichen 
+% -  Bsp. für gezeigte Payoffs und 𝑔=𝑏=
+% 3
+% 4
+% ,𝑝=
+% 2
+% 3
+ 
+% o  Batch-Mode: A und B konsumieren erst, C in zweiter Runde 
+% o  Einer-Pro-Runde. Erst A, dann je nach Ergebnis B oder C. Merke: Ergebnis (gut, schlecht) 
+% konsumieren nur 2 Spieler, bei (schlecht, gut) alle drei. 
+% o  Ergebnis: C sollte warten, obwohl C auch sofort konsumieren würde (positiver Payoff) 
+
+
+%       % The value to a player of any node in the tree
+% is the expected value of consuming the product,
+% given the updated value of r at that node of tree.
+% The expected social value of an allocation is the
+% sum, over all nodes in the tree, of each node’s
+% value to the player it is assigned to, weighted by
+% the probability that it is reached. For a fixed
+% number of players n, the number of possible
+% allocations is finite, implying that there is always
+% an efficient allocation.
+
+	\item Die Konsumreihenfolge aus \ref{it:payoffs} ist \textit{nicht} optimal. \textcite[S.~572]{avery_market_1999} führen Faustformeln für die optimale  Reihenfolge der Bewertungen an. Demnach sollten alle, die sicher sind, das Produkt zu konsumieren, es sofort tun, was in Aufgabenteil \ref{it:payoffs} gegeben ist. Gilt zusätzlich $\left(r_{B} \geq r_{A}\right)$ oder auch $\left(s_{B} \geq s_{A}\right)$, dann sollte jedoch B zuerst konsumieren. Im vorliegenden Fall konsumiert aber A zuerst, weshalb die Konsumreihenfolge \textit{nicht} optimal ist. Überdies sollte D gänzlich auf Konsum verzichten, da er in jedem Fall einen nicht positiven Payoff erlangt. 
+	
+\end{enumerate}
+ \printbibliography
+\end{document}
+

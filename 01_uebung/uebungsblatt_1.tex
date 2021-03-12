@@ -1,0 +1,121 @@
+\documentclass{article}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=10mm,
+ top=20mm,
+ }
+ \usepackage[ngerman,german]{babel}
+ \usepackage{csquotes}
+ \usepackage[style=apa,backend=biber]{biblatex}
+ \addbibresource{main.bib}
+
+ %set page header and footer
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \lhead{Com S 311: Homework 1}
+% \chead{First Last}
+% \rhead{\today}
+
+
+\titlelabel{\thetitle\enspace}
+
+
+\begin{document}
+
+\author{Markus Bilz -- Matr. Nr. 2327197}
+\title{Übungsblatt 1 Recommendersysteme}
+\maketitle
+% \thispagestyle{fancy}
+
+\begin{enumerate}[a.]
+\item Die naive Prognose entspricht dem arithmetischen Mittel der abgegebenen Bewertungen des Nutzers \autocite{geyer-schulz_sonnenbichler_2019}. Für Lina gilt damit: 
+$$\tilde{x}_{L}=\frac{1}{n} \sum s_{k}=\frac{4+4+1+5+2}{5}=\frac{16}{5},
+$$ 
+
+wobei $s_k$ das $k$-te Rating der betrachteten Nutzerin ist.
+
+\item Um die Abhängigkeit zwischen zwei Benutzern zu messen, kann der Pearson'sche Korrelationskoeffizient verwendet werden.
+
+\item Zunächst sind die Mittel der gemeinsamen Profile zu bestimmen:
+
+$$\bar{x}_{F} =\frac{2+2+4+1+5}{5}=\frac{14}{5}$$ 
+und
+$$\bar{x}_{J}= \frac{5+4+2+1}{4}=3,$$ 
+
+woraus später dann der Korrelationskoeffizient bestimmt werden kann. Weiterhin sind die lokalen Mittelwerte für Lina notwendig. Diese sind:
+$$\bar{x}_{L}=\frac{4+4+1+5+2}{5}=\frac{16}{5},
+$$ 
+und
+$$\bar{x}_{L}=\frac{4+4+1+5}{4}=\frac{7}{2}.
+$$ 
+
+Nach \textcite{geyer-schulz_sonnenbichler_2019} gilt für den Korrelationskoeffizient: 
+
+$$
+r_{k l}=\frac{\operatorname{cov}\left(s_{k}, s_{l}\right)}{\sigma_{k} \sigma_{l}}=\frac{\sum_{i}\left(x_{i, k}-\bar{x}_{k}\right)\left(x_{i, l}-\bar{x}_{l}\right)}{\sqrt{\sum_{i}\left(x_{i, k}-\bar{x}_{k}\right)^{2}} \sqrt{\sum_{i}\left(x_{i, l}-\bar{x}_{l}\right)^{2}}}.
+$$
+
+Damit folgt:
+
+\begin{equation*}
+\begin{split}
+r_{\text {L}, \text {F}} &=\frac{2\left(4-\frac{16}{5}\right)\left(2-\frac{14}{5}\right)+\left(1-\frac{16}{5}\right)\left(4-\frac{14}{5}\right)+\left(5-\frac{16}{5}\right)\left(1-\frac{14}{5}\right)+\left(2-\frac{16}{5}\right)\left(5-\frac{14}{5}\right)}{\sqrt{2\left(4-\frac{16}{5}\right)^{2}+\left(1-\frac{16}{5}\right)^{2}+\left(5-\frac{16}{5}\right)^{2}+\left(2-\frac{16}{5}\right)^{2}} \sqrt{2\left(2-\frac{14}{5}\right)^{2}+\left(4-\frac{14}{5}\right)^{2}+\left(1-\frac{14}{5}\right)^{2}+\left(5-\frac{14}{5}\right)^{2}}}\\
+&=-\frac{49}{54},
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+r_{\text {L}, \text {J}}&=\frac{\left(4-\frac{7}{2}\right)\left(5-3\right)+\left(4-\frac{7}{2}\right)\left(4-3\right)+\left(1-\frac{7}{2}\right)\left(2-3\right)+\left(5-\frac{7}{2}\right)\left(1-3\right)}{\sqrt{2\left(4-\frac{7}{2}\right)^{2}+\left(1-\frac{7}{2}\right)^{2}+\left(5-\frac{7}{2}\right)^{2}} \sqrt{\left(5-3\right)^{2}+\left(4-3\right)^{2}+\left(2-3\right)^{2}+\left(1-3\right)^{2}}}\\
+&= \frac{1}{3 \sqrt{10}}.
+\end{split}
+\end{equation*}
+
+Damit entspricht die Korrelation zwischen Lina und Felix $-\frac{49}{54}$ und zwischen Lina und Johannes $\frac{1}{3 \sqrt{10}}$.
+
+\item Der Korrelationskoeffizient nimmt einen Wert der zwischen $-1$ und $1$ an, wobei $1$ eine vollständige positive Korrelation indiziert. Die hohe negative Korrelation zwischen Lina und Felix lässt darauf schließen, dass die beiden häufig gegensätzlich bewerten. Umso besser Lina bewertet, umso schlechter bewertet Johannes und vice versa.
+
+Da der Korrelationskoeffizient für Lina und Johannes nahe Null liegt, lässt sich schließen, dass kein bzw. sehr schwacher Zusammenhang zwischen den Bewertungen von Lina und Johannes besteht.
+\item 
+Zunächst ist der Korrelationskoeffizient zwischen Hannah und Lina zu bestimmen.
+
+Der lokale Mittelwert für Hannah ist:
+$$\bar{x}_{H}=\frac{1+4+2+4}{4}=\frac{11}{4}.
+$$ 
+
+Der lokale Mittelwert für Lina ist:
+$$\bar{x}_{L}=\frac{4+1+5+2}{4}=3.
+$$ 
+
+Der Korrelationskoeffizient zwischen beiden ist:
+\begin{equation*}
+    \begin{split}
+    r_{\text {L}, \text {H}}&=\frac{\left(4-3\right)\left(1-\frac{11}{4}\right)+\left(1-3\right)\left(4-\frac{11}{4}\right)+\left(5-3\right)\left(2-\frac{11}{4}\right)+\left(2-3\right)\left(4-\frac{11}{4}\right)}{\sqrt{\left(4-3\right)^{2}+\left(1-3\right)^{2}+\left(5-3\right)^{2}+\left(2-3\right)^{2}} \sqrt{\left(1-\frac{11}{4}\right)^{2}+2\left(4-\frac{11}{4}\right)^{2}+\left(2-\frac{11}{4}\right)^{2}}}\\
+    &= -\frac{7\sqrt{30}}{45}.
+    \end{split}
+    \end{equation*}
+
+Es gilt nach \textcite{geyer-schulz_sonnenbichler_2019}:
+
+$$
+x_{1, \text { L }}=\tilde{x}_{\text {L }}+\frac{\left(x_{1, \text { H}}-\bar{x}_{\text {H}}\right) r_{\text {L,H}} + \left(x_{1, \text { F}}-\bar{x}_{\text {F}}\right) r_{\text {L,F}}+\left(x_{1, \text {J}}-\bar{x}_{\text {J}}\right) r_{\text {L,J}}}{\left|r_{\text {L,H }}\right| + \left|r_{\text {L,F }}\right|+\left| r_{\text {L,J}}\right|}.
+$$
+
+Damit folgt eine verbesserte Prognose unter Berücksichtigung aller Bewerter von:
+
+$$
+x_{1, \text{L}}=\frac{16}{5}+\frac{\left(2-\frac{11}{4}\right) \left(-\frac{7\sqrt{30}}{45}\right) + \left(3-\frac{14}{5}\right) \left(-\frac{49}{54}\right) +\left(5-3\right) \frac{1}{3 \sqrt{10}}}{|-\frac{7\sqrt{30}}{45}| + |-\frac{49}{54}|+|\frac{1}{3 \sqrt{10}}|}=3.558 \approx 4.
+$$
+
+\end{enumerate}    
+
+Lina würde den Roman Rabenfrauen wahrscheinlich mit 4 Punkten bewerten.
+
+\printbibliography
+\end{document}
+
